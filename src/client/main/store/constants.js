@@ -1,0 +1,3 @@
+export const ADD_GIRAFFE = 'ADD_GIRAFFE';
+export const REMOVE_GIRAFFE = 'REMOVE_GIRAFFE';
+export const EDIT_GIRAFFE = 'EDIT_GIRAFFE';

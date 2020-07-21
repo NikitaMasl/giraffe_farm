@@ -1,0 +1,366 @@
+$main-color: #567354;
+
+.main-container{    
+    width: 80%;
+    height: 95%;
+    background: #FFFFFF;
+    border-radius: 25px;
+    padding: 15px 25px 0 25px;
+}
+.main-container-giraffe{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    .aviaries-header{
+        position: relative;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .aviaries-swircher{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+            .aviary{
+                margin-right: 10px;
+                position: relative;
+                h4{
+                    height: 19px;
+                    margin: 0;
+                    color: #D9D9D9;
+                    font-weight: 300;
+                    vertical-align: middle;
+                    transition: all .5S;
+                }
+                &:hover{
+                    cursor: pointer;
+                    &::after{
+                        width: 100%;
+                    }
+                    h4{
+                        color: #484848;;
+                    }
+                }
+                &::after{
+                    position: absolute;
+                    content: '';
+                    z-index: 2;
+                    bottom: -15px;
+                    height: 3px;
+                    width: 0%;
+                    background: $main-color;
+                    border-radius: 18px;
+                    transition: all .5s;
+                }
+            }
+            .active-aviary{
+                h4{
+                    color: #484848;;
+                }
+                &::after{
+                    width: 100%;
+                }
+            }
+            .addMore{
+                width: 20px;
+                height: 20px;
+                border-radius: 20px;
+                background-color:  #D9D9D9;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all .5s;
+                &:hover{
+                    background: $main-color;
+                    cursor: pointer;
+                }
+            }
+            .disable{
+                width: 20px;
+                height: 20px;
+                border-radius: 20px;
+                background-color:  #D9D9D9;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .personal-info{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+            img{
+                width: 25px;
+                height: 25px;
+                margin-right: 10px;
+            }
+            h4{
+                margin: 0;
+                color: #484848;
+                font-weight: 300;
+                vertical-align: middle;
+            }
+            i{
+                color: $main-color;
+                font-size: 20px;
+                margin-right: 25px;
+            }
+        }
+        &::after{
+            position: absolute;
+            content: '';
+            bottom: 0;
+            height: 3.5px;
+            width: 100%;
+            background: #D9D9D9;
+            border-radius: 18px;
+        }
+    }
+    .aviaries-body{
+        position: relative;
+        width: 100%;
+        height: 93%;
+        .aviaries-title{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            color: $main-color;
+            .addGiraffe{
+                width: 30px;
+                height: 30px;
+                border-radius: 30px;
+                font-size: 20px;
+                background: $main-color;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-left: 15px;
+                transition: all .5s;
+                &:hover{
+                    cursor: pointer;
+                    transform: scale(1.1);
+                    background: #455c43;
+                }
+            }
+        }
+        .giraffes-container{
+            overflow-x: auto;
+            overflow-y: hidden;
+            height: 80%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-left: 20px;
+            padding-top: 5px;
+            &::-webkit-scrollbar{ 
+                width: 3px; 
+                height: 3px;
+            }
+            &::-webkit-scrollbar-track{  
+                background-color: #999;
+            }
+            &::-webkit-scrollbar-track-piece{ 
+                background-color: #ffffff;
+            }
+            &::-webkit-scrollbar-thumb{ 
+                height: 50px; 
+                background-color: $main-color; 
+                border-radius: 3px;
+            }
+            &::-webkit-scrollbar-corner{ 
+                background-color: $main-color;
+            }
+            &::-webkit-resizer{ 
+                background-color: $main-color;
+            }
+        }
+    }
+    .aviary-filling{
+        position: fixed;
+        right: 50px;
+        background: $main-color;
+        color: white;
+        border-radius: 28px;
+        padding: 20px;
+        width: 40vw;
+        z-index: 1;
+        transition: all .5s;
+        h2{
+            margin: 0 20px 0 0;
+            text-align: left;
+            span{
+                font-size: 50px;
+                font-weight: 300;
+                margin-right: 10px;
+            }
+        }
+        .progbar-wrapper{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            margin-top: 20px;
+            .progress{
+                width: 60%;
+                height: 40px;
+                border-radius: 40px;
+                position: relative;
+                &:nth-child(1) .fill{
+                    background-color: #F3DBC7;
+                }
+            }
+            .border{
+                width: calc(100% - 4px);
+                height: 36px;
+                border: 4px solid #435F40;
+                background-color: #435F40;
+                border-radius: 40px;
+            }
+            .fill{
+                background-size: 36px;
+                border-radius: 36px;
+                height: calc(100% - 1px);
+                margin-top: 1px;
+                transition: width 0.3s;
+                animation: move 0.5s linear infinite paused;
+            }
+            .info{
+                height: 36px;
+                border-radius: 40px;
+                background: #435F40;
+                padding: 0 10px 0 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all .5s;
+                h4{
+                    color: white;
+                    font-weight: 300;
+                    margin: 0;
+                }
+                &:hover{
+                    cursor: pointer;
+                    background: #364d34;
+                }
+            }
+        }
+        .closeOrOpen{
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 18px;
+            transition: all .5s;
+            &:hover{
+                cursor: pointer;
+                font-size: 20px;
+            }
+        }
+    }
+    .info-container{
+        position: fixed;
+        left: 10%;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 15px #869CB0;
+        min-width: 40%;
+        border-radius: 28px;
+        padding: 20px;
+        transition: all .5s;
+        h4{
+            font-size: 20px;
+            color: #435F40;
+            margin: 0;
+        }
+        table{
+            margin-top: 20px;
+            width: 100%;
+            position: relative;
+            thead{
+                tr{
+                    th{
+                        text-align: left;
+                        padding: 10px 0 10px 0;
+                        font-weight: normal;
+                        font-size: 12px;
+                        line-height: 14px;
+                        color: #B4B4B4;
+                    }
+                    &::before{
+                        position: absolute;
+                        top: -2px;
+                        content: '';
+                        height: 3px;
+                        width: 100%;
+                        background: #D9D9D9;
+                        border-radius: 50px;
+                    }
+                }
+            }
+            tbody{
+                tr{
+                    padding: 20px 0 20px 0;
+                    td{
+                        text-align: left;
+                        color: #435F40;
+                        font-weight: normal;
+                        font-size: 12px;
+                    }
+                    &::before{
+                        position: absolute;
+                        content: '';
+                        height: 1px;
+                        width: 100%;
+                        background: #D9D9D9;
+                        border-radius: 50px;
+                    }
+                    .done, .notConfermed, .rejected, .awaiting{
+                        color: #8B8B8B;
+                        border-radius: 5px;
+                        padding: 5px;
+                    }
+                    .awaiting{
+                        background: #D2EFFF;
+                    }
+                    .done{
+                        background: #C1FFC8;
+                    }
+                    .notConfermed{
+                        background: #FFEAC1;
+                    }
+                    .rejected{
+                        background: #FFC1C1;
+                    }
+                }
+            }
+        }
+        i{
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: #435F40;
+            font-size: 18px;
+            transition: all .5s;
+            &:hover{
+                cursor: pointer;
+                font-size: 20px;
+            }
+        }
+    }
+}
+@media only screen and (max-height: 1000px){   
+    .main-container-giraffe .aviaries-header .aviaries-swircher .aviary::after{
+        height: 3.5px;
+    }
+}

@@ -1,0 +1,15 @@
+main{
+    position: relative;
+    width: calc(100vw/1.05);
+    margin-left: auto;
+    margin-right: auto;
+    height: calc(100vh/1.05);
+    margin-top: 10px;
+    background: #668663;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: calc(100vh*.025);
+}
