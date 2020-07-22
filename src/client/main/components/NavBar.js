@@ -17,7 +17,7 @@ export default class NavBar extends Component {
         return (
             <div className="navbar-container">   
                 <div className="logo">
-                    <img src='../../../../uploads/logo.png' alt="logo"/>
+                    <img src='./img/logo.png' alt="logo"/>
                     <div className="logo-text">
                         <h4>Ферма Заслуженных Жирафов</h4>
                         <p>России и СНГ</p>

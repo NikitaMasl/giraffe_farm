@@ -171,7 +171,7 @@ class Giraffe extends Component {
                         :
                         img
                         ?
-                        <img src={`../../../../uploads/${img}`} alt="giraffe foto"/>
+                        <img src={`./img/${img}`} alt="giraffe foto"/>
                         :
                         <div>
                             <i className="fas fa-camera"></i>

@@ -160,7 +160,7 @@ class MainSection extends Component {
                     </div>
                     <div className="personal-info">
                         <i className="far fa-bell"></i>
-                        <img src='../../../../uploads/logo.png' alt="logo"/>
+                        <img src='./img/logo.png' alt="logo"/>
                         <h4>hello@giraffe.com</h4>
                     </div>
                 </div>
