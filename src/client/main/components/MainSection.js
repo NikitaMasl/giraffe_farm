@@ -107,12 +107,18 @@ class MainSection extends Component {
             }
         }else{
             height = {
-                bottom: `-75px`
+                bottom: `-70px`
             }
         }
         if(isInfoOpen){
-            infoHeight = {
-                bottom: `10px`
+            if(document.clientWidth < 940){
+                infoHeight = {
+                    bottom: `10px`
+                }
+            }else{
+                infoHeight = {
+                    bottom: `120px`
+                }
             }
         }else{
             infoHeight = {

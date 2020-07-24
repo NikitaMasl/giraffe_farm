@@ -160,7 +160,7 @@ $main-color: #567354;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
-            align-items: flex-start;
+            align-items: center;
             padding-left: 20px;
             padding-top: 5px;
             &::-webkit-scrollbar{ 
@@ -368,5 +368,59 @@ $main-color: #567354;
 @media only screen and (max-height: 1000px){   
     .main-container-giraffe .aviaries-header .aviaries-swircher .aviary::after{
         height: 3.5px;
+    }
+}
+@media only screen and (max-width: 1020px) and (min-width: 550px){  
+    .aviary-filling{
+        right: 5px !important;
+        width: 50vw !important;
+        padding: 10px !important;
+        h2{
+            font-size: 18px;
+            span{
+                font-size: 25px !important;
+            }
+        }
+    }
+    nav{
+        ul{
+            padding: 0 !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 800px){  
+    .main-container{
+        width: 100%;
+        height: 100%;
+        margin-bottom: 5px;
+        .aviaries-title{
+            h1{
+                margin: 0;
+            }
+        }
+        .personal-info{
+            display: none !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 550px){ 
+    .aviary-filling{    
+        right: 5vw !important;
+        width: 90vw !important;
+        padding: 10px !important;
+        
+        h2{
+            font-size: 18px;
+            margin-left: 15px;
+            span{
+                font-size: 25px !important;
+            }
+        }
+    }
+    .info-container{
+        left: 5vw !important;
+        width: 90vw;
     }
 }

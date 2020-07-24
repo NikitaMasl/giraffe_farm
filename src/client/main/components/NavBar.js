@@ -13,7 +13,22 @@ function AppLink(props){
 }
 
 export default class NavBar extends Component {
+    constructor(props){
+        super(props)
+
+        this.changeIsMenuOpen = this.changeIsMenuOpen.bind(this);
+
+        this.state={
+            isMenuOpen: false
+        }
+    }
+    changeIsMenuOpen(){
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen
+        })
+    }
     render() {
+        const { isMenuOpen } = this.state
         return (
             <div className="navbar-container">   
                 <div className="logo">
@@ -23,7 +38,19 @@ export default class NavBar extends Component {
                         <p>России и СНГ</p>
                     </div>
                 </div> 
-                <nav>
+                {
+                    isMenuOpen
+                    ?null
+                    :
+                    <label className="open" htmlFor="menu" onClick={this.changeIsMenuOpen} >
+                        <i className="fa fa-bars" ></i>
+                    </label>
+                }
+                <nav className={
+                    isMenuOpen
+                    ?"menuopen"
+                    :""
+                }>
                     <ul>
                         <AppLink exact to='/'><i className="fas fa-home"></i>Главная</AppLink>
                         <AppLink to='/manage'><i className="fas fa-tasks"></i>Управление</AppLink>
@@ -33,6 +60,14 @@ export default class NavBar extends Component {
                         <AppLink to='/support'><i className="fas fa-tools"></i>Поддержка</AppLink>
                     </ul>
                 </nav>
+                {
+                    isMenuOpen
+                    ?
+                    <label className="close" htmlFor="menu" onClick={this.changeIsMenuOpen} >
+                        <i className="far fa-times-circle"></i>
+                    </label>
+                    :null
+                }
             </div>
         )
     }
