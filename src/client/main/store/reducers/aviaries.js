@@ -7,7 +7,7 @@ const AVIARIES = {
         aviaries:  [],
     }
 
-export const aviaries = (state = AVIARIES.aviaries, { type, id, name, weight, sex, height, color, diet, temper, img }) => {
+export const aviaries = (state = AVIARIES.aviaries, { type, id, name, weight, sex, height, color, diet, temper, img, aviary }) => {
     switch (type){
         case ADD_GIRAFFE:
             return [{
@@ -19,7 +19,8 @@ export const aviaries = (state = AVIARIES.aviaries, { type, id, name, weight, se
                 color: color, 
                 diet: diet, 
                 temper: temper,
-                img: img
+                img: img,
+                aviary: aviary
             }, ...state]
         case REMOVE_GIRAFFE:
             return state.filter(el => el.id !== id)

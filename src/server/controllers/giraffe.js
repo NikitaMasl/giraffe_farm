@@ -16,6 +16,7 @@ module.exports = {
         const diet = req.body.diet;
         const temper = req.body.temper;
         const image = req.body.image;
+        const aviary = req.body.aviary;
 
         const newGiraffe = new Giraffe({
             name,
@@ -26,6 +27,7 @@ module.exports = {
             diet,
             temper,
             image,
+            aviary,
         })
 
         newGiraffe.save()

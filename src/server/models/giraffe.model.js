@@ -26,6 +26,9 @@ const GiraffeSchema = new Schema({
     image: {
         type: String
     },
+    aviary: {
+        type: Number
+    }
 });
 
 const Giraffe = mongoose.model('giraffe', GiraffeSchema);
