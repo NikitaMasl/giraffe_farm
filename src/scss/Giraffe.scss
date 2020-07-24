@@ -23,13 +23,14 @@ $main-color: #567354;
         justify-content: center;
         align-items: center;
         background: white;
-        border-radius: 100%;
-        width: 55%;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 50%;
         height: 100px;
         font-size: 35px;
         color: #D9D9D9;
         img{
-            border-radius: 100%;
+            border-radius: 50%;
             height: 100%;
         }
         div{
@@ -185,5 +186,78 @@ $main-color: #567354;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+}
+@media only screen and (min-width: 1500px){
+    .giraffe-container {
+        max-width: 500px;
+        min-width: 270px;
+        .img-container{
+            height: 175px;
+            width: 175px;
+        }
+        .name{
+            h2{
+                font-size: 30px !important;
+            }
+        }
+        .params{ 
+            .params-icons{
+                font-size: 25px !important;
+                margin-top: 20px;
+            }
+            .params-value{
+                h3{
+                    font-size: 20px;
+                }
+            }
+        }
+        .info{
+            margin-top: 20px;
+            h4{
+                font-size: 20px;
+            }
+        }
+        .edit {
+            h2{
+                font-size: 30px;
+            }
+            &:hover{
+                h2{
+                    font-size: 35px;
+                }
+            }
+        }
+        .edit-window {
+            font-size: 25px !important;
+            top: 8% !important;
+        }
+    }
+}
+@media only screen and (min-width: 2400px){
+    .giraffe-container {
+        .name{
+            h2{
+                font-size: 35px !important;
+            }
+        }
+        .params{ 
+            .params-icons{
+                font-size: 35px !important;
+                margin-top: 25px;
+            }
+            .params-value{
+                h3{
+                    font-size: 30px;
+                }
+            }
+        }
+        .info{
+            margin-top: 25px;
+            h4{
+                font-size: 27px;
+            }
+        }
+
     }
 }

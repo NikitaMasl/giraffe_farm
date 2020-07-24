@@ -424,3 +424,81 @@ $main-color: #567354;
         width: 90vw;
     }
 }
+
+@media only screen and (min-width: 1500px){
+    .aviaries-header {
+        .aviaries-swircher{
+            h4{
+                font-size: 25px;
+                height: auto !important;
+            }
+            .addMore{
+                width: 30px !important;
+                height: 30px !important;
+                i{
+                    font-size: 30px !important;
+                }
+            }
+        }
+        .personal-info {
+            font-size: 25px;
+            img{
+                width: 40px !important;
+                height: 40px !important;
+            }
+            i{
+                font-size: 30px !important;
+            }
+        }
+        &::after{
+            bottom: -5px !important;
+        }
+    }
+    .aviary-filling{
+        h2{
+            font-size: 35px;
+            span{
+                font-size: 60px !important;
+            }
+        }
+        .closeOrOpen{
+            font-size: 30px !important;
+        }
+        .progbar-wrapper{
+            height: 50px !important;
+            .info{
+                height: 50px !important;
+                padding: 0 20px 0 20px !important;
+                font-size: 30px;
+            }
+        }
+    }
+    .info-container{
+        .title {
+            h4{
+                font-size: 30px !important;
+            }
+            i{
+                font-size: 25px !important;
+            }
+        }
+        table {
+            thead {
+                tr {
+                    height: 60px !important;
+                    th{
+                        font-size: 25px !important;
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    height: 60px !important;
+                    td{
+                        font-size: 25px !important;
+                    }
+                }
+            }
+        }
+    }
+}
