@@ -276,15 +276,32 @@ $main-color: #567354;
         box-shadow: 0px 4px 15px #869CB0;
         min-width: 40%;
         border-radius: 28px;
-        padding: 20px;
+        padding: 20px 30px 10px 30px;
         transition: all .5s;
-        h4{
-            font-size: 20px;
-            color: #435F40;
-            margin: 0;
+        .title{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            h4{
+                font-size: 15px;
+                color: #435F40;
+                font-style: normal;
+                font-weight: bold;
+                margin: 0;
+            }
+            i{
+                color: #435F40;
+                font-size: 15px;
+                transition: all .5s;
+                &:hover{
+                    cursor: pointer;
+                    font-size: 18px;
+                }
+            }
         }
         table{
-            margin-top: 20px;
+            margin-top: 5px;
             width: 100%;
             position: relative;
             thead{
@@ -310,6 +327,7 @@ $main-color: #567354;
             }
             tbody{
                 tr{
+                    height: 40px;
                     padding: 20px 0 20px 0;
                     td{
                         text-align: left;
@@ -343,18 +361,6 @@ $main-color: #567354;
                         background: #FFC1C1;
                     }
                 }
-            }
-        }
-        i{
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            color: #435F40;
-            font-size: 18px;
-            transition: all .5s;
-            &:hover{
-                cursor: pointer;
-                font-size: 20px;
             }
         }
     }

@@ -47,7 +47,8 @@ class MainSection extends Component {
                         el.color,
                         el.diet,   
                         el.temper,
-                        el.image
+                        el.image,
+                        el.aviary
                         )
                 })
             })
@@ -62,7 +63,8 @@ class MainSection extends Component {
             color: '',
             diet: '',
             temper: '',
-            image: ''
+            image: '',
+            aviary: this.state.activeAviary
         }
 
         fetch(`${BASE_PATH}/giraffe`, {
@@ -75,14 +77,14 @@ class MainSection extends Component {
             .then(res => res.json())
             .then(res => {
                 console.log()
-                this.props.addGiraffe(res._id, 'Имя', -1, '-', -1, '', '', '', '')
+                this.props.addGiraffe(res._id, 'Имя', -1, '-', -1, '', '', '', '', this.state.activeAviary)
             })
             .catch(err => console.log(`Error: ${err}`))
         
     }
     render() {
         const { aviaries, isFillingOpen, isInfoOpen, numberOfAviaries, activeAviary } = this.state; 
-        const giraffes = aviaries.filter((el, index) => (index <= 6+(activeAviary*7) && index >= 0+(activeAviary*7)));
+        const giraffes = aviaries.filter(el => el.aviary === activeAviary);
 
         let width = {
             width: `0%`
@@ -226,7 +228,16 @@ class MainSection extends Component {
                         </div>
                     </div>
                     <div className="info-container" style={infoHeight}>
-                        <h4>Обновления</h4>
+                        <div className="title">
+                        <h4>
+                            Обновления
+                        </h4>
+                        <i className="fas fa-times" onClick={() => {
+                            this.setState({
+                                isInfoOpen: false
+                            })
+                        }}></i>
+                        </div>
                         <table>
                             <thead>
                                 <tr>
@@ -241,70 +252,34 @@ class MainSection extends Component {
                                     <td>01 июня 2020</td>
                                     <td>Новый Жираф</td>
                                     <td>Пряник</td>
-                                    <td><p className="awaiting">Ожидается</p></td>
+                                    <td><span className="awaiting">Ожидается</span></td>
                                 </tr>
                                 <tr>
                                     <td>20 апр 2020</td>
                                     <td>Новый жираф</td>
                                     <td>Матильда</td>
-                                    <td><p className="done">Выполнено</p></td>
+                                    <td><span className="done">Выполнено</span></td>
                                 </tr>
                                 <tr>
                                     <td>15 апр 2020</td>
                                     <td>Редактировать</td>
                                     <td>Шнур</td>
-                                    <td><p className="notConfermed">Не подтвержден</p></td>
+                                    <td><span className="notConfermed">Не подтвержден</span></td>
                                 </tr>
                                 <tr>
                                     <td>05 апр 2020</td>
                                     <td>Удалить</td>
                                     <td>Ракета</td>
-                                    <td><p className="done">Выполнено</p></td>
+                                    <td><span className="done">Выполнено</span></td>
                                 </tr>
                                 <tr>
                                     <td>04 апр 2020</td>
                                     <td>Перевод</td>
                                     <td>Леонид</td>
-                                    <td><p className="rejected">Отклонено</p></td>
+                                    <td><span className="rejected">Отклонено</span></td>
                                 </tr>
-
-                                {/* {
-                                    aviaries[activeAviary-1].giraffes
-                                    ?
-                                    giraffesWithAction.map(el => (
-                                            <tr key = { el.id }>
-                                                <td>{ el.date }</td>
-                                                <td>{ el.action }</td>
-                                                <td>{ el.name }</td>
-                                                <td>
-                                                    <p className={
-                                                        el.readiness === 'Выполнено'
-                                                        ?
-                                                        'done'
-                                                        :
-                                                            el.readiness === 'Не подтвержден'
-                                                            ?
-                                                            'notConfermed'
-                                                            :
-                                                                el.readiness === 'Отклонено'
-                                                                ?
-                                                                'rejected'
-                                                                :''
-
-                                                    }>{ el.readiness }
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                    ))  
-                                    :null
-                                } */}
                             </tbody>
                         </table>
-                        <i className="fas fa-times" onClick={() => {
-                            this.setState({
-                                isInfoOpen: false
-                            })
-                        }}></i>
                     </div>
                 </div>
             </div>
