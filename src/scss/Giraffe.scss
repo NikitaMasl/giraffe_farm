@@ -34,8 +34,6 @@ $main-color: #567354;
             height: 100%;
         }
         div{
-            // width: 80px;
-            // height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -217,11 +215,52 @@ $main-color: #567354;
     }
 }
 
+@media only screen and (max-width: 500px){
+    .giraffe-container {
+        .name {
+            h2{
+                margin: 5px;
+            }
+        }
+        .params {
+            .params-value{
+                margin-top: 5px;
+            }
+        }
+        .info {
+            h4{
+                margin-top: 5px;
+            }
+        }
+        .save-btn-container{
+            margin-top: 5px;
+        }
+    }
+}
+
 @media only screen and (max-width: 980px){
     .giraffe-container {
         .img-container{
             width: 100px;
             height: 100px;
+        }
+        .name {
+            h2{
+                margin: 10px;
+            }
+        }
+        .params {
+            .params-value{
+                margin-top: 10px;
+            }
+        }
+        .info {
+            h4{
+                margin-top: 10px;
+            }
+        }
+        .save-btn-container{
+            margin-top: 10px;
         }
     }
 }
