@@ -16,6 +16,7 @@ class Giraffe extends Component {
         this.getImgName = this.getImgName.bind(this);
         this.saveGiraffe = this.saveGiraffe.bind(this);
         this.sendReqForRem = this.sendReqForRem.bind(this);
+        this.lengthControlFoo = this.lengthControlFoo.bind(this);
 
         this.state = {
             img: this.props.img,
@@ -41,17 +42,32 @@ class Giraffe extends Component {
         }
     }
     static getDerivedStateFromProps(nextProps, prevState){
-        if (prevState !== nextProps) {          
-            return {
-                img: nextProps.img,
-                name: nextProps.name,
-                sex: nextProps.sex,
-                weight: nextProps.weight,
-                height: nextProps.height,
-                color: nextProps.color,
-                diet: nextProps.diet,
-                temper: nextProps.temper,
-                id: nextProps.id
+        if (prevState !== nextProps) {
+            if(nextProps.name === 'Имя'){
+                return {
+                    img: nextProps.img,
+                    name: nextProps.name,
+                    sex: nextProps.sex,
+                    weight: nextProps.weight,
+                    height: nextProps.height,
+                    color: nextProps.color,
+                    diet: nextProps.diet,
+                    temper: nextProps.temper,
+                    id: nextProps.id,
+                    isCorrecting: true
+                }
+            }else{
+                return {
+                    img: nextProps.img,
+                    name: nextProps.name,
+                    sex: nextProps.sex,
+                    weight: nextProps.weight,
+                    height: nextProps.height,
+                    color: nextProps.color,
+                    diet: nextProps.diet,
+                    temper: nextProps.temper,
+                    id: nextProps.id
+                }
             }
         }
         return null;
@@ -59,28 +75,30 @@ class Giraffe extends Component {
 
     getImgName(value){
         this.setState({
-            new_img:value
+            new_img: value,
+            img: value
         })
     }
 
     addNewValueToState(e){
         e.persist()
+
         this.setState((state) => {
-            switch (e.target.name) {
+            switch (e.target.getAttribute('name')) {
                 case 'new_name':
-                    return {new_name: e.target.value}
+                    return {new_name: e.target.innerHTML}
                 case 'new_sex':
-                    return {new_sex: e.target.value}
+                    return {new_sex: e.target.innerHTML}
                 case 'new_weight':
-                    return {new_weight: e.target.value}
+                    return {new_weight: e.target.innerHTML}
                 case 'new_height':
-                    return {new_height: e.target.value}
+                    return {new_height: e.target.innerHTML}
                 case 'new_color':
-                    return {new_color: e.target.value}
+                    return {new_color: e.target.innerHTML}
                 case 'new_diet':
-                    return {new_diet: e.target.value}
+                    return {new_diet: e.target.innerHTML}
                 case 'new_temper':
-                    return {new_temper: e.target.value}
+                    return {new_temper: e.target.innerHTML}
                 default:
                     break;
             }
@@ -116,7 +134,7 @@ class Giraffe extends Component {
         if(new_temper){
             newGiraffeForSending.temper = new_temper
         }
-        console.log(newGiraffeForSending)
+
         fetch(`${BASE_PATH}/giraffe/${id}`,{
             method: 'PUT',
             headers: {
@@ -125,7 +143,6 @@ class Giraffe extends Component {
             body: JSON.stringify(newGiraffeForSending)
         })
             .then(res => res.json())
-            .then(res => console.log(res))
             .catch(err => console.log(`Error: ${err}`))
 
         this.props.editGirraffe( id, new_name, new_weight, new_sex, new_height, new_color, new_diet, new_temper, new_img )
@@ -144,20 +161,41 @@ class Giraffe extends Component {
             .catch(err => console.log(`Error: ${err}`))
 
         this.setState({
+            isCorrecting: false,
             isEditOpen: false
         })
         this.props.removeGiraffe(id)
     }
+    lengthControlFoo(e){
+        let maxLength = Number(e.target.getAttribute('maxLength'));
+
+        if(e.keyCode !== 8 && e.target.innerHTML.length > maxLength){
+            e.preventDefault();
+        }else{
+            if(e.target.getAttribute('name') === 'new_weight' || e.target.getAttribute('name') === 'new_height'){
+                if(e.keyCode < 48 || e.keyCode > 57 ){
+                    if(e.keyCode !== 8 && e.keyCode !== 190 && e.keyCode !== 188){
+                        e.preventDefault()
+                    }else{
+                        if(e.key === 'ю' || e.key === 'б' || e.key === 'Б' || e.key === 'Ю'){
+                            e.preventDefault()
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     render() {
-        const { id, img, name, sex, weight, height, color, diet, temper, isEditOpen, isCorrecting } = this.state;
+        const { id, img, name, sex, weight, height, color, diet, temper, isEditOpen, isCorrecting, new_name } = this.state;
 
         if(img){
             require(`../../../../uploads/${img}`)
         }
+
         return (
             <div className={
-                isCorrecting || name === 'Имя'
+                isCorrecting
                 ?
                 "giraffe-container shadow"
                 :
@@ -165,28 +203,26 @@ class Giraffe extends Component {
                 }>
                 <div className="img-container">
                     {
-                        isCorrecting
+                        isCorrecting 
                         ?
-                        <UploadExample getImgName={this.getImgName}/>
+                        <UploadExample getImgName={this.getImgName} image={img}/>
                         :
-                        img
-                        ?
-                        <img src={`./img/${img}`} alt="giraffe foto"/>
-                        :
-                        <div>
-                            <i className="fas fa-camera"></i>
-                        </div>
+                            img
+                            ?
+                            <img src={`./img/${img}`} alt="giraffe foto"/>
+                            :
+                            <div>
+                                <i className="fas fa-camera"></i>
+                            </div>
                     }
                 </div>
                 <div className="name">
-                    <h2>
-                        {
-                            isCorrecting
-                            ?
-                            <input name="new_name" onChange={this.addNewValueToState}/>
-                            :
-                            name
-                        }
+                    <h2 suppressContentEditableWarning={true} contentEditable={
+                        isCorrecting 
+                        ?true
+                        :false
+                    } onKeyDown={this.lengthControlFoo} name = "new_name" maxLength="10" onKeyUp={this.addNewValueToState}>
+                        {name}
                     </h2>
                 </div>
                 <div className="params">
@@ -196,73 +232,67 @@ class Giraffe extends Component {
                         <i className="fas fa-ruler-vertical"></i>
                     </div>
                     <div className="params-value">
-                        <h3>
+                        <h3 suppressContentEditableWarning={true} contentEditable={
+                            isCorrecting 
+                            ?"plaintext-only"
+                            :false
+                            } onKeyDown={this.lengthControlFoo} name = "new_sex" maxLength="0" onKeyUp={this.addNewValueToState} >
+                            {sex}
+                        </h3>
+                        <h3 suppressContentEditableWarning={true} contentEditable={
+                            isCorrecting 
+                            ?true
+                            :false
+                            } onKeyDown={this.lengthControlFoo} name = "new_weight" maxLength="3" onKeyUp={this.addNewValueToState} >
                             {
-                                isCorrecting
+                                weight === -1
                                 ?
-                                <input name="new_sex" onChange={this.addNewValueToState} />
+                                '-'
                                 :
-                                sex
+                                weight
                             }
                         </h3>
-                        <h3>
+                        <h3 suppressContentEditableWarning={true} contentEditable={
+                                isCorrecting 
+                                ?true
+                                :false
+                            } onKeyDown={this.lengthControlFoo} name = "new_height" maxLength="4" onKeyUp={this.addNewValueToState}>
                             {
-                                isCorrecting
+                                height === -1
                                 ?
-                                <input name="new_weight" type="number" className="number-input" onChange={this.addNewValueToState} />
+                                '-'
                                 :
-                                    weight === -1
-                                    ?
-                                    '-'
-                                    :
-                                    weight
-                            }
-                        </h3>
-                        <h3>
-                            {
-                                isCorrecting
-                                ?
-                                <input name="new_height" type="number" className="number-input" onChange={this.addNewValueToState} />
-                                :
-                                    height === -1
-                                    ?
-                                    '-'
-                                    :
-                                    height
+                                height
                             }
                         </h3>
                     </div>
                 </div>
                 <div className="info">
                     <h4>
-                        <span>Цвет:</span>
-                        {
-                            isCorrecting
-                            ?
-                            <input name="new_color" onChange={this.addNewValueToState} />
-                            :
-                            color
-                        }
+                        Цвет:
+                        <span suppressContentEditableWarning={true} contentEditable={
+                                isCorrecting
+                                ?true
+                                :false
+                            } onKeyDown={this.lengthControlFoo} name = "new_color" maxLength="10" onKeyUp={this.addNewValueToState}>
+                            {color}
+                        </span>
                     </h4>
                     <h4>
-                        <span>Диета:</span>
-                        {
-                            isCorrecting
-                            ?
-                            <input name="new_diet" onChange={this.addNewValueToState} />
-                            :
-                            diet
-                        }
+                        Диета:
+                        <span suppressContentEditableWarning={true} contentEditable={
+                                isCorrecting
+                                ?true
+                                :false
+                            } onKeyDown={this.lengthControlFoo} name = "new_diet" maxLength="12" onKeyUp={this.addNewValueToState}>{diet}</span>
                     </h4>
                     <h4>
-                        <span>Характер:</span>
-                        {
-                            isCorrecting
-                            ?
-                            <input name="new_temper" onChange={this.addNewValueToState} />
-                            :
-                            temper
-                        }
+                        Характер:
+                        <span suppressContentEditableWarning={true} contentEditable={
+                                isCorrecting
+                                ?true
+                                :false
+                            } onKeyDown={this.lengthControlFoo} name = "new_temper" maxLength="12" onKeyUp={this.addNewValueToState}>{temper}</span>
                     </h4>
                 </div>
                 <div className="edit" onClick={() => {
@@ -271,22 +301,25 @@ class Giraffe extends Component {
                         })
                     }
                 }>
-                    <h2>...</h2>
+                    <i className="fas fa-ellipsis-h"></i>
                 </div>
                 {
                     isCorrecting || name === 'Имя'
                     ?
                     <div className={
-                        name === 'Имя' && !isCorrecting
+                        name === 'Имя' && isCorrecting && new_name === ''
                         ?"save-btn-container disabled"
                         :"save-btn-container"
                         } 
-                        onClick={() => {
-                            this.saveGiraffe()
-                            this.setState({
-                                isCorrecting: false
-                        })
-                    }}>
+                        onClick={
+                            () => {
+                            if( name !== 'Имя' || new_name !== '' ) {   
+                                this.saveGiraffe()
+                                this.setState({
+                                    isCorrecting: false
+                                })
+                            }
+                        }}>
                         <h4>Сохранить</h4>
                     </div>
                     :null

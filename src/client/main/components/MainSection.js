@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addGiraffe } from '../store/action';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { BASE_PATH } from '../constants';
+import { BASE_PATH, roughScale } from '../constants';
 
 import '../../../scss/MainSection.scss';
 
@@ -38,20 +38,22 @@ class MainSection extends Component {
             .then(res => res.json())
             .then(giraffes => {
                 giraffes.map(el => {
-                    this.props.addGiraffe(
-                        el._id, 
-                        el.name,
-                        Number(el.weight),
-                        el.sex,
-                        Number(el.height),
-                        el.color,
-                        el.diet,   
-                        el.temper,
-                        el.image,
-                        el.aviary
-                        )
+                    if(this.props.aviaries.every(elem => roughScale(el._id) !== roughScale(elem.id))){
+                        this.props.addGiraffe(
+                            el._id, 
+                            el.name,
+                            Number(el.weight),
+                            el.sex,
+                            Number(el.height),
+                            el.color,
+                            el.diet,   
+                            el.temper,
+                            el.image,
+                            el.aviary
+                            )
+                        }
+                    })
                 })
-            })
             .catch(err => console.log(err))
     }
     newGiraffe(){
@@ -186,7 +188,7 @@ class MainSection extends Component {
                             giraffes.map((el, index) => (
                                 <Giraffe 
                                     id = { el.id }  
-                                    key = { index }        
+                                    key = { index+(activeAviary*10) }        
                                     img = { el.img }
                                     name = { el.name }
                                     sex = { el.sex }
@@ -195,6 +197,7 @@ class MainSection extends Component {
                                     color = { el.color }
                                     diet = { el.diet }
                                     temper = { el.temper }
+                                    isCorrecting = { el.name === 'Имя' }
                                     />
                             ))
                             :null
